@@ -23,5 +23,9 @@
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true
   }
 }
