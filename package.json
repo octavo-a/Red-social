@@ -1,0 +1,27 @@
+{
+  "name": "scl007-social-network",
+  "version": "1.0.0",
+  "description": "01FrontEndTrack",
+  "main": "src/data.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaquelCC/SCL007-Social-Network.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaquelCC/SCL007-Social-Network/issues"
+  },
+  "homepage": "https://github.com/RaquelCC/SCL007-Social-Network#readme",
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
