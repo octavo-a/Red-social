@@ -65,7 +65,7 @@ const config = {
          <div id="user-name">Raquel Patricia Canales Concha</div>
          <div class="side-option"><a>Perfil de Usuario</a></div>
          <div class="side-option"><a>Amigos</a></div>
-         <div class="side-option"><a>Cerrar Sesión</a></div>
+         <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
 
      </div>
      <footer class="responsive">
@@ -84,6 +84,8 @@ const config = {
   document.getElementById("content").addEventListener("click", ()=> {
     document.getElementById("user-profile-side-nav").style.display = "none";
   })
+
+  document.getElementById("logout").addEventListener("click", logout)
     } else {
       // No user is signed in.
       loginPage();
