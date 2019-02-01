@@ -3,10 +3,11 @@
 
 html {
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: lightblue;
+    background-color: #d5e3e7;
     margin: 0;
     height: 100%;
 }
@@ -61,7 +62,6 @@ body {
     padding: 12px;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
-    border: none;
     border: 0.5px solid rgb(11, 89, 116);
 
 }
@@ -92,3 +92,159 @@ body {
 .login-btn:focus {
     outline: none;
 }
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: whitesmoke;
+    /* background-color:  rgb(33, 126, 156); */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: whitesmoke;
+    /* background-color:  rgb(33, 126, 156); */
+    display: flex;
+}
+
+.icon-large {
+    max-width: 50px;
+}
+
+#user-profile {
+    display: block;
+    margin: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    
+}
+
+.responsive {
+    display: none;
+}
+
+#user-profile-side-nav {
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 70%;
+    background-color: whitesmoke;
+    z-index: 100;
+    margin: auto;
+    right: 0;
+}
+
+.user-pic, #user-name {
+    max-width: 50%;
+    display: block;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 50%;
+}
+
+#user-name {
+    text-align: center;
+    font-size: 18px;
+}
+
+.side-option {
+    max-width: 90%;
+    height: 10%;
+    display: flex;
+    margin: 15% auto;
+    font-size: 18px;
+
+}
+
+.side-option a {
+    display: block;
+    margin: auto;
+}
+
+#content {
+    height: 100%;
+    margin-top: 80px;
+    display: flex-start;
+}
+
+
+.user-pic-post {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.post {
+    width: 80%;
+    min-height: 20%;
+    margin: 5% auto;
+    padding: 5%;
+    border: 1px solid rgb(33, 126, 156);
+    background-color: whitesmoke;
+    border-radius: 10px;
+
+}
+
+.post .post-header span p {
+    margin: auto 0;
+    display: inline-block;
+}
+
+.post-header span {
+    display: flex;
+}
+
+.post-content {
+    padding: 10px;
+}
+
+.post-content span {
+    word-wrap: break-word;
+}
+
+#search-nav {
+    display: block;
+    margin: auto;
+    margin-right: 1%;
+}
+#search {
+    border-radius: 10px;
+    line-height: 30px;
+    border: 1px solid rgb(11, 89, 116);
+    padding: 5px;
+    font-size: 14px;
+    max-width: 70%;
+}
+
+.fas.fa-search.fa-lg {
+    margin-left: 10px;
+}
+
+#search:focus {
+    outline: none;
+    border: 2px solid rgb(11, 89, 116);
+}
+
+#logo {
+    max-height: 80px;
+    display: block;
+    margin: auto;
+}
+
+#div-logo {
+    display: block;
+    margin: auto;
+    max-height: 80px;
+}
+
+@media only screen and (max-width: 768px) {
+    .responsive {
+        display: flex;
+    }
+  }
