@@ -1,4 +1,9 @@
-let userNow;
+let firebaseData = {
+    userNow: false,
+    postsNow: false,
+}
+
+
 window.socialNetwork = {
 
     createNewUserStorage: ()=> {
@@ -22,16 +27,39 @@ window.socialNetwork = {
             return snapshot
         })
         .then(user=> {
-            userNow = user.val()
+            firebaseData.userNow = user.val()
         })
 
-        return userNow;
+        return firebaseData.userNow;
         
     },
 
     getPosts: ()=> {
-        
-    }
+        firebase.database().ref("/posts").on("value", function(snapshot){
+            firebaseData.postsNow = (snapshot.val());
+        })
+        return firebaseData.postsNow
+     },
+    
+    printPosts: ()=> {
+        console.log("imprimiendo posts")
+        for(let post in firebaseData.postsNow) {
+            document.getElementById("content").innerHTML += `
+            <div class="post">
+                   <div class="post-header">
+                       <span><img src="./img/userLogo.png" class="user-pic-post" alt="userPic"><p>${firebaseData.postsNow[post].author} - Profesora de Básica</p></span>
+      
+                   </div>
+                   <div class="post-content">
+                    <span>${firebaseData.postsNow[post].content}</span>
+                   </div>
+               </div>
+            
+            `
+          }
+    },
+    
+    
 
 
 

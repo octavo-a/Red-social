@@ -45,7 +45,8 @@ const config = {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
-      window.socialNetwork.createNewUserStorage(user);
+      window.socialNetwork.getPosts();
+      window.socialNetwork.createNewUserStorage();
       document.getElementById("root").innerHTML = `
       
       <nav class="responsive">
@@ -56,15 +57,7 @@ const config = {
      </nav>
 
      <div id="content">
-         <div class="post">
-             <div class="post-header">
-                 <span><img src="./img/userLogo.png" class="user-pic-post" alt="userPic"><p>Raquel Patricia Canales Concha - Profesora de Básica</p></span>
-
-             </div>
-             <div class="post-content">
-              <span>Me gustaría que pudieran sugerirme actividades para realizar en el aula con niños de 4to Básico, estamos viendo los recursos naturales de las regiones a lo largo del país, gracias!</span>
-             </div>
-         </div>
+         
 
      </div>
      <div id="user-profile-side-nav">
@@ -80,7 +73,8 @@ const config = {
      </footer>
       
       `
-      
+    setTimeout(window.socialNetwork.printPosts, 2000)
+    // window.socialNetwork.printPosts(firebaseData.postsNow)
   // BOTON BARRA DE NAVEGACIÓN LATERAL
   document.getElementById("user-profile").addEventListener("click", ()=> {
     document.getElementById("user-profile-side-nav").style.display = "block";
