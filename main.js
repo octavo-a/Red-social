@@ -11,8 +11,11 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+  
+
   // FUNCION QUE CREA PAGINA INICIAL
   function loginPage() {
+    
     document.getElementById("root").innerHTML = `
     <div id="logins">
     <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
@@ -44,36 +47,41 @@ const config = {
   // LO QUE SE CREA CUANDO LOGEA EL USUARIO
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      // window.socialNetwork.getPosts(window.socialNetwork.printPosts);
       // User is signed in.
-      window.socialNetwork.getPosts();
-      window.socialNetwork.createNewUserStorage();
-      document.getElementById("root").innerHTML = `
+      // window.socialNetwork.printContentPage(window.socialNetwork.printPosts(window.socialNetwork.getPosts()));
+        // window.socialNetwork.getPosts();
+        window.socialNetwork.createNewUserStorage();
+        document.getElementById("root").innerHTML = `
+        
+        <nav class="responsive">
+        <div id="div-logo">
+            <img id="logo" src="./img/teachersLogo.png" alt="logo">
+        </div>
+        <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a><i class="fas fa-search fa-lg"></i></a></div>
+       </nav>
+  
+       <div id="content">
+           
+  
+       </div>
+       <div id="user-profile-side-nav">
+           <div id="user-pic"><img src="./img/userLogo.png" class="user-pic" alt="userPic"></div>
+           <div id="user-name">Raquel Patricia Canales Concha</div>
+           <div class="side-option"><a>Perfil de Usuario</a></div>
+           <div class="side-option"><a>Amigos</a></div>
+           <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
+  
+       </div>
+       <footer class="responsive">
+           <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
+       </footer>
+        
+        `
       
-      <nav class="responsive">
-      <div id="div-logo">
-          <img id="logo" src="./img/teachersLogo.png" alt="logo">
-      </div>
-      <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a><i class="fas fa-search fa-lg"></i></a></div>
-     </nav>
-
-     <div id="content">
-         
-
-     </div>
-     <div id="user-profile-side-nav">
-         <div id="user-pic"><img src="./img/userLogo.png" class="user-pic" alt="userPic"></div>
-         <div id="user-name">Raquel Patricia Canales Concha</div>
-         <div class="side-option"><a>Perfil de Usuario</a></div>
-         <div class="side-option"><a>Amigos</a></div>
-         <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
-
-     </div>
-     <footer class="responsive">
-         <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
-     </footer>
-      
-      `
-    setTimeout(window.socialNetwork.printPosts, 2000)
+      window.socialNetwork.printPosts();
+    
+    // setTimeout(window.socialNetwork.printPosts, 2000)
     // window.socialNetwork.printPosts(firebaseData.postsNow)
   // BOTON BARRA DE NAVEGACIÓN LATERAL
   document.getElementById("user-profile").addEventListener("click", ()=> {
