@@ -169,7 +169,7 @@ footer {
 #content {
     height: 100%;
     margin-top: 80px;
-    display: flex-start;
+    /* display: flex-start; */
 }
 
 
@@ -180,7 +180,7 @@ footer {
     margin-left: 10px;
 }
 
-.post {
+.post, .comments-section {
     width: 80%;
     min-height: 20%;
     margin: 5% auto;
@@ -191,20 +191,20 @@ footer {
 
 }
 
-.post .post-header span p {
+.post .post-header span p, .comments-section .comment-header span p {
     margin: auto 0;
     display: inline-block;
 }
 
-.post-header span {
+.post-header span, .comment-header span {
     display: flex;
 }
 
-.post-content {
+.post-content, .comment-content {
     padding: 10px;
 }
 
-.post-content span {
+.post-content span, .comment-content span {
     word-wrap: break-word;
 }
 
@@ -242,6 +242,23 @@ footer {
     margin: auto;
     max-height: 80px;
 }
+
+.like, .comments{
+    cursor: pointer;
+    display: inline-flex;
+    flex-flow: row;
+}
+
+.like .material-icons, .comments .material-icons{
+    margin: auto 5px;
+    display: inline-block;
+}
+
+.like span, .comments span{
+    display: inline-block;
+    margin: auto 5px;
+}
+
 
 @media only screen and (max-width: 768px) {
     .responsive {
