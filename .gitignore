@@ -1,2 +1,6 @@
 node_modules
+<<<<<<< HEAD
+.DS_Store
+=======
 src/indexprobando.html
+>>>>>>> f1431d26f406d68b1b51623bbaf949513511cec5
