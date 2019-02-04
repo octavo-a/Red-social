@@ -1,3 +1,4 @@
+
 let firebaseData = {
     userNow: false,
     postsNow: false,
@@ -152,6 +153,7 @@ window.socialNetwork = {
 //         }
 //     }
 //   }
+
 
 
 
