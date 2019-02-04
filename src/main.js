@@ -47,10 +47,7 @@ const config = {
   // LO QUE SE CREA CUANDO LOGEA EL USUARIO
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // window.socialNetwork.getPosts(window.socialNetwork.printPosts);
       // User is signed in.
-      // window.socialNetwork.printContentPage(window.socialNetwork.printPosts(window.socialNetwork.getPosts()));
-        // window.socialNetwork.getPosts();
         window.socialNetwork.createNewUserStorage();
         document.getElementById("root").innerHTML = `
         
@@ -80,9 +77,6 @@ const config = {
         `
       
       window.socialNetwork.printPosts();
-    
-    // setTimeout(window.socialNetwork.printPosts, 2000)
-    // window.socialNetwork.printPosts(firebaseData.postsNow)
   // BOTON BARRA DE NAVEGACIÓN LATERAL
   document.getElementById("user-profile").addEventListener("click", ()=> {
     document.getElementById("user-profile-side-nav").style.display = "block";
