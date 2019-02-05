@@ -32,6 +32,16 @@ body {
     
 }
 
+.teachers-font {
+    color: rgb(11, 89, 116);
+    text-align: center;
+}
+
+#new-account {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
 
 .login p {
     margin: 1em;
@@ -50,9 +60,23 @@ body {
     margin: 1em 0.4em;
 }
 
-#logins {
+#logins, #logo {
     display: block;
     margin: auto;
+}
+
+#logins {
+    margin-top: 10px;
+}
+
+#create-account {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login {
+    margin: 10px auto;
 }
 
 .login-input, .post-input, select.post-input option {
@@ -305,6 +329,10 @@ textarea.post-input {
     overflow: auto;
     display: flex;
 }
+
+/* .line {
+    text-decoration-line: 
+} */
 
 @media only screen and (max-width: 768px) {
     .responsive {
