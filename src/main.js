@@ -11,7 +11,54 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+  function printPostsDOM(snapshot){
+    document.getElementById("content").innerHTML = ""
+    let postKeys = Object.keys(snapshot.val());
+    postKeys.reverse();
+    for(let post of postKeys) {
+        
+        document.getElementById("content").innerHTML += `
+        <div class="post">
+               <div class="post-header">
+                   <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
   
+               </div>
+               <div class="post-content">
+                <span>${snapshot.val()[post].content}</span>
+               </div>
+               <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+               <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
+               <div class="comments-section" id="comments-section-${post}">
+               
+               </div>
+        </div>
+
+        
+        `
+
+        document.getElementById("comments-section-"+post).style.display = "none"
+
+        if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
+            document.getElementById(post).innerHTML = `
+            <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
+            `
+        }
+        // console.log("creando funciones")
+        let likeButtons = document.getElementsByClassName("like");
+        for (let i = 0; i < likeButtons.length; i++) {
+            likeButtons[i].addEventListener("click", setLikePost)
+        }
+        let commentsButtons = document.getElementsByClassName("comments");
+        for (let i = 0; i < commentsButtons.length; i++) {
+            commentsButtons[i].addEventListener("click", showComments)
+        }
+
+        // document.getElementById(post).addEventListener("click", setLikePost)
+        // document.getElementById("comments"+post).addEventListener("click", showComments)
+        
+      }
+    
+}
 
   // FUNCION QUE CREA PAGINA INICIAL
   function loginPage() {
@@ -56,6 +103,11 @@ const config = {
       
       
       `
+      document.getElementById("login-btn").addEventListener("click", ()=>{
+        const mail = document.getElementById("login-mail"). value;
+        const pwd = document.getElementById("login-pwd").value;
+        createAccount(mail, pwd);
+      })
     })
 
   }
@@ -96,54 +148,7 @@ const config = {
         
         `
       
-      window.socialNetwork.printPosts(function(snapshot){
-        document.getElementById("content").innerHTML = ""
-        let postKeys = Object.keys(snapshot.val());
-        postKeys.reverse();
-        for(let post of postKeys) {
-            
-            document.getElementById("content").innerHTML += `
-            <div class="post">
-                   <div class="post-header">
-                       <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
-      
-                   </div>
-                   <div class="post-content">
-                    <span>${snapshot.val()[post].content}</span>
-                   </div>
-                   <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
-                   <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
-                   <div class="comments-section" id="comments-section-${post}">
-                   
-                   </div>
-            </div>
-
-            
-            `
-
-            document.getElementById("comments-section-"+post).style.display = "none"
-
-            if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
-                document.getElementById(post).innerHTML = `
-                <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
-                `
-            }
-            // console.log("creando funciones")
-            let likeButtons = document.getElementsByClassName("like");
-            for (let i = 0; i < likeButtons.length; i++) {
-                likeButtons[i].addEventListener("click", setLikePost)
-            }
-            let commentsButtons = document.getElementsByClassName("comments");
-            for (let i = 0; i < commentsButtons.length; i++) {
-                commentsButtons[i].addEventListener("click", showComments)
-            }
-
-            // document.getElementById(post).addEventListener("click", setLikePost)
-            // document.getElementById("comments"+post).addEventListener("click", showComments)
-            
-          }
-        
-    });
+      window.socialNetwork.printPosts(printPostsDOM);
 
   
   // BOTON QUE CREA PAGINA PARA POSTEAR
@@ -163,10 +168,23 @@ const config = {
     
     `
     //BOTON QUE GENERA POST
-    document.getElementById("post-it").addEventListener("click", submitpost)
+    document.getElementById("post-it").addEventListener("click", ()=> {
+      const tags = document.getElementById("post-tags").value;
+      const privacy = document.getElementById("privacy-setting").value;
+      const userId = firebase.auth().currentUser.uid;
+      const post_text = document.getElementById("post-text").value;
+
+      if (post_text === "" || tags === "" || privacy === "") {
+        alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
+        return
+      }
+      submitpost(tags, privacy, userId, post_text)
+    } )//este es el de submit post
 
     //BOTON QUE VUELVE A LOS POST
-    document.getElementById("cancel").addEventListener("click", window.socialNetwork.printPosts)
+    document.getElementById("cancel").addEventListener("click", ()=> {
+      window.socialNetwork.printPosts(printPostsDOM)
+    })
   })
 
   // BOTON BARRA DE NAVEGACIÓN LATERAL
