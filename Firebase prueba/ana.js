@@ -24,8 +24,6 @@ window.onload = initialization;
     
     document.getElementById("btn").addEventListener("click", submitpost, false)   
     
-    
-
   }
 
   function submitpost() {
