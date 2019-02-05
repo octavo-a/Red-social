@@ -264,6 +264,13 @@ footer {
     max-height: 80px;
     display: block;
     margin: auto;
+   
+}
+
+#logo-login {
+    max-height: 80px;
+    display: block;
+    margin: auto;
     min-height: fit-content;
     overflow: hidden;
     margin-bottom: 0;

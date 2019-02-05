@@ -64,7 +64,7 @@ const config = {
   function loginPage() {
     
     document.getElementById("root").innerHTML = `
-    <div id="logo"><img src="./img/teachersLogo.png"></div>
+    <div id="logo-login"><img src="./img/teachersLogo.png"></div>
     <div id="logins">
     <p class="teachers-font">Si ya tienes cuenta con nosotros, inicia sesión!</p>
     <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
@@ -93,7 +93,7 @@ const config = {
     // BOTON QUE LLEVA A PAGINA DE CREAR CUENTA
     document.getElementById("new-account").addEventListener("click", ()=> {
       document.getElementById("root").innerHTML = `
-      <div id="logo"><img src="./img/teachersLogo.png"></div>
+      <div id="logo-login"><img src="./img/teachersLogo.png"></div>
       <div id="create-account">
       <p class="teachers-font">Ingresa un correo y una contraseña para tu cuenta</p>
       <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
