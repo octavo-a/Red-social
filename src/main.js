@@ -208,11 +208,11 @@ const config = {
   firebase.auth().getRedirectResult().then(function(result) {
     if (result.credential) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
+      const token = result.credential.accessToken;
       // ...
     }
     // The signed-in user info.
-    var user = result.user;
+    const user = result.user;
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
