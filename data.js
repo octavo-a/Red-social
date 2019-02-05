@@ -26,7 +26,9 @@ window.socialNetwork = {
     printPosts: ()=> {
         firebase.database().ref("/posts").on("value", function(snapshot){
             document.getElementById("content").innerHTML = ""
-            for(let post in snapshot.val()) {
+            let postKeys = Object.keys(snapshot.val());
+            postKeys.reverse();
+            for(let post of postKeys) {
                 document.getElementById("content").innerHTML += `
                 <div class="post">
                        <div class="post-header">
@@ -52,8 +54,18 @@ window.socialNetwork = {
                     <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
                     `
                 }
-                document.getElementById(post).addEventListener("click", setLikePost)
-                document.getElementById("comments"+post).addEventListener("click", showComments)
+                // console.log("creando funciones")
+                let likeButtons = document.getElementsByClassName("like");
+                for (let i = 0; i < likeButtons.length; i++) {
+                    likeButtons[i].addEventListener("click", setLikePost)
+                }
+                let commentsButtons = document.getElementsByClassName("comments");
+                for (let i = 0; i < commentsButtons.length; i++) {
+                    commentsButtons[i].addEventListener("click", showComments)
+                }
+
+                // document.getElementById(post).addEventListener("click", setLikePost)
+                // document.getElementById("comments"+post).addEventListener("click", showComments)
                 
               }
             

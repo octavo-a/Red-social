@@ -71,12 +71,38 @@ const config = {
   
        </div>
        <footer class="responsive">
-           <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
+          <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
+          <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
        </footer>
         
         `
       
       window.socialNetwork.printPosts();
+
+  
+  // BOTON QUE CREA PAGINA PARA POSTEAR
+  document.getElementById("new-post").addEventListener("click", ()=> {
+    document.getElementById("content").innerHTML = `
+    <div><input class="post-input" type="text" id="post-tags" placeholder="#tags #etiquetas #máximo3"></div>
+    <div class="select-div" ><select class="post-input" id="privacy-setting">
+    <option value="" disabled selected>Seleccione la privacidad de su post</option>
+    <option value="public">Post Público</option>
+    <option value="private">Post Privado(solo amigos)</option>
+    </select></div>
+    <div class="input-div"><textarea class="post-input" type="text" id="post-text"></textarea></div>
+    <div class="post-and-cancel">
+    <button type="button" id="cancel">Cancelar</button>
+    <button type="button" id="post-it">Crear publicación</button>
+    </div>
+    
+    `
+    //BOTON QUE GENERA POST
+    document.getElementById("post-it").addEventListener("click", submitpost)
+
+    //BOTON QUE VUELVE A LOS POST
+    document.getElementById("cancel").addEventListener("click", window.socialNetwork.printPosts)
+  })
+
   // BOTON BARRA DE NAVEGACIÓN LATERAL
   document.getElementById("user-profile").addEventListener("click", ()=> {
     document.getElementById("user-profile-side-nav").style.display = "block";
@@ -139,6 +165,7 @@ const config = {
 
 
 
-
 })
+
+
 
