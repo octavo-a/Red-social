@@ -269,6 +269,12 @@ footer {
     margin-bottom: 0;
 }
 
+#volver {
+    display: block;
+    text-decoration-line: underline;
+    margin-top: 50px;
+}
+
 #div-logo {
     display: block;
     margin: auto;
