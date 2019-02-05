@@ -33,8 +33,9 @@ window.onload = initialization;
 
     if (post_text === ""){
 
-      return
+      return 
     }
+  
 
   var newPostKey = firebase.database().ref().child('users/perfil/post').push().key;
 
@@ -51,11 +52,8 @@ window.onload = initialization;
 
 //se limpia el textarea al hacer click
  
-//   function clearText(){
-//     document.getElementById("btn").addEventListener('click',clear);
-// }
-//   function clear(){
-//     post_text.innerHTML = "";
+// function clearContents(post_text) {
+//   post_text.value = '';
 // }
 
 
@@ -97,6 +95,14 @@ preObject.innerText = JSON.stringify(snap.val(), null, 3);
 
 }());
 
+// function funcionPrincipal(callback){
+//   alert('hago algo y llamo al callback avisando que terminé');
+//   callback('Miguel');
+// }
+
+// funcionPrincipal(function(nombre){
+//  alert('me llamo ' + nombre);
+// });
 
 
 
