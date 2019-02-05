@@ -41,7 +41,7 @@ window.socialNetwork = {
                        </div>
                        <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
                        <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
-                       <div class="comments-section" id="comments-section-${post}">
+                       <div class="comments-secti   on" id="comments-section-${post}">
                        
                        </div>
                 </div>
