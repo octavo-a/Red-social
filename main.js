@@ -17,10 +17,14 @@ const config = {
   function loginPage() {
     
     document.getElementById("root").innerHTML = `
+    <div id="logo"><img src="./img/teachersLogo.png"></div>
     <div id="logins">
+    <p class="teachers-font">Si ya tienes cuenta con nosotros, inicia sesión!</p>
     <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
     <input type="password" id="login-pwd" class="login-input" placeholder="Contraseña..">
     <button id="login-btn" class="login-btn">Iniciar Sesión</button>
+    <p class="teachers-font">¿No tienes cuenta? Registrate <a id="new-account">AQUÍ</a></p>
+    <p class="teachers-font">------------------  O  ------------------</p>
     <span id="google-login" class="login"><img src="img/googleLogo.png" class="icon" alt="googleLogo"><p>Iniciar Sesión con Google</p></span>
     <span id="facebook-login" class="login facebook"><img src="img/facebookLogo2.png" class="icon" alt="facebookLogo"><p>Iniciar Sesión con Facebook</p></span>
     </div>
@@ -37,6 +41,21 @@ const config = {
       const email = document.getElementById("login-mail").value;
       const password = document.getElementById("login-pwd").value;
       emailLogin(email, password);
+    })
+
+    // BOTON PARA CREAR CUENTA
+    document.getElementById("new-account").addEventListener("click", ()=> {
+      document.getElementById("root").innerHTML = `
+      <div id="logo"><img src="./img/teachersLogo.png"></div>
+      <div id="create-account">
+      <p class="teachers-font">Ingresa un correo y una contraseña para tu cuenta</p>
+      <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
+      <input type="password" id="login-pwd" class="login-input" placeholder="Contraseña..">
+      <button id="login-btn" class="login-btn">Crear Cuenta</button>
+      </div>
+      
+      
+      `
     })
 
   }
@@ -63,8 +82,8 @@ const config = {
   
        </div>
        <div id="user-profile-side-nav">
-           <div id="user-pic"><img src="./img/userLogo.png" class="user-pic" alt="userPic"></div>
-           <div id="user-name">Raquel Patricia Canales Concha</div>
+           <div id="user-pic"><img src="${firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : './img/userLogo.png'}" class="user-pic" alt="userPic"></div>
+           <div id="user-name">${firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email}</div>
            <div class="side-option"><a>Perfil de Usuario</a></div>
            <div class="side-option"><a>Amigos</a></div>
            <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
@@ -77,7 +96,54 @@ const config = {
         
         `
       
-      window.socialNetwork.printPosts();
+      window.socialNetwork.printPosts(function(snapshot){
+        document.getElementById("content").innerHTML = ""
+        let postKeys = Object.keys(snapshot.val());
+        postKeys.reverse();
+        for(let post of postKeys) {
+            
+            document.getElementById("content").innerHTML += `
+            <div class="post">
+                   <div class="post-header">
+                       <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
+      
+                   </div>
+                   <div class="post-content">
+                    <span>${snapshot.val()[post].content}</span>
+                   </div>
+                   <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+                   <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
+                   <div class="comments-section" id="comments-section-${post}">
+                   
+                   </div>
+            </div>
+
+            
+            `
+
+            document.getElementById("comments-section-"+post).style.display = "none"
+
+            if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
+                document.getElementById(post).innerHTML = `
+                <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
+                `
+            }
+            // console.log("creando funciones")
+            let likeButtons = document.getElementsByClassName("like");
+            for (let i = 0; i < likeButtons.length; i++) {
+                likeButtons[i].addEventListener("click", setLikePost)
+            }
+            let commentsButtons = document.getElementsByClassName("comments");
+            for (let i = 0; i < commentsButtons.length; i++) {
+                commentsButtons[i].addEventListener("click", showComments)
+            }
+
+            // document.getElementById(post).addEventListener("click", setLikePost)
+            // document.getElementById("comments"+post).addEventListener("click", showComments)
+            
+          }
+        
+    });
 
   
   // BOTON QUE CREA PAGINA PARA POSTEAR

@@ -15,8 +15,8 @@ function facebookLogin() {
 function emailLogin(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.log(`${errorCode} ${errorMessage}`)
         // ...
       });
@@ -27,5 +27,17 @@ function logout() {
         // Sign-out successful.
       }).catch(function(error) {
         // An error happened.
+        console.log(error)
+      });
+}
+
+// CREAR CUENTA MAIL Y PWD
+function createAccount(mail, pwd) {
+    firebase.auth().createUserWithEmailAndPassword(mail, pwd).catch(function(error) {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ...
+        console.log(`${errorCode} ${errorMessage}`)
       });
 }
