@@ -90,7 +90,7 @@ const config = {
       emailLogin(email, password);
     })
 
-    // BOTON PARA CREAR CUENTA
+    // BOTON QUE LLEVA A PAGINA DE CREAR CUENTA
     document.getElementById("new-account").addEventListener("click", ()=> {
       document.getElementById("root").innerHTML = `
       <div id="logo"><img src="./img/teachersLogo.png"></div>
@@ -99,10 +99,15 @@ const config = {
       <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
       <input type="password" id="login-pwd" class="login-input" placeholder="Contraseña..">
       <button id="login-btn" class="login-btn">Crear Cuenta</button>
+      <a class="teachers-font" id="volver">Volver</a>
       </div>
       
       
       `
+      // BOTON QUE VUELVE AL LOGIN
+      document.getElementById("volver").addEventListener("click", loginPage)
+
+      // BOTON QUE CREA CUENTA
       document.getElementById("login-btn").addEventListener("click", ()=>{
         const mail = document.getElementById("login-mail"). value;
         const pwd = document.getElementById("login-pwd").value;
