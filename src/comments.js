@@ -50,13 +50,17 @@ function submitpost() {
     updates["users/"+userId+"/post" + newPostKey] = {
         "tags": tags,
         "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text
+        "content": post_text,
+        "authorId": firebase.auth().currentUser.uid,
+        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
     }
     const updates2 = {};
     updates2["posts/post" + newPostKey] ={
         "tags": tags,
         "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text
+        "content": post_text,
+        "authorId": firebase.auth().currentUser.uid,
+        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
     }
 
     firebase.database().ref().update(updates);

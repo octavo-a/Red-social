@@ -29,10 +29,11 @@ window.socialNetwork = {
             let postKeys = Object.keys(snapshot.val());
             postKeys.reverse();
             for(let post of postKeys) {
+                
                 document.getElementById("content").innerHTML += `
                 <div class="post">
                        <div class="post-header">
-                           <span><img src="./img/userLogo.png" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
+                           <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
           
                        </div>
                        <div class="post-content">
@@ -47,6 +48,7 @@ window.socialNetwork = {
 
                 
                 `
+
                 document.getElementById("comments-section-"+post).style.display = "none"
 
                 if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
