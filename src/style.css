@@ -55,23 +55,23 @@ body {
     margin: auto;
 }
 
-.login-input {
+.login-input, .post-input, select.post-input option {
     width: 250px;
     display: block;
     margin: 10px auto;
     padding: 12px;
     border-radius: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     border: 0.5px solid rgb(11, 89, 116);
 
 }
 
-.login-input:focus {
+.login-input:focus, .post-input:focus {
     outline: none;
     border: 2px solid rgb(11, 89, 116);
 }
 
-.login-btn {
+.login-btn, #post-it, #cancel {
     display: block;
     margin: 10px auto;
     font-family: 'Roboto', sans-serif;
@@ -89,7 +89,7 @@ body {
     background-color: rgb(11, 89, 116);
 }
 
-.login-btn:focus {
+.login-btn:focus, #post-it:focus, #cancel:focus {
     outline: none;
 }
 
@@ -110,15 +110,17 @@ footer {
     background-color: whitesmoke;
     /* background-color:  rgb(33, 126, 156); */
     display: flex;
+    flex-flow: row-reverse;
 }
 
-.icon-large {
+.icon-large, i.fas.fa-edit.fa-3x:before {
     max-width: 50px;
+    max-height: 50px;
 }
 
-#user-profile {
+#user-profile, #new-post {
     display: block;
-    margin: auto;
+    margin: auto 10px;
     margin-right: 10px;
     cursor: pointer;
     
@@ -169,6 +171,8 @@ footer {
 #content {
     height: 100%;
     margin-top: 80px;
+    margin-bottom: 80px;
+    overflow: scroll;
     /* display: flex-start; */
 }
 
@@ -259,6 +263,47 @@ footer {
     margin: auto 5px;
 }
 
+.post-input {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    border-radius: 10px;
+}
+
+select.post-input {
+    box-sizing: content-box;
+    background-color: white;
+}
+
+textarea.post-input {
+    word-break: break-word;
+    resize: none;
+    height: 80%;
+}
+
+.input-div {
+    height: 60%;
+}
+
+#post-it {
+    float: right;
+    margin-right: 7%;
+    color: white;
+    background-color: rgb(11, 89, 116);
+}
+
+#cancel {
+    display: block;
+    margin: auto;
+    margin-left: 7%;
+    float: left;
+}
+
+.post-and-cancel {
+    width: 100%;
+    overflow: auto;
+    display: flex;
+}
 
 @media only screen and (max-width: 768px) {
     .responsive {
