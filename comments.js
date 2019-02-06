@@ -33,21 +33,13 @@ function showComments() {
     }
 }
 
-function submitpost() {
-    const tags = document.getElementById("post-tags").value;
-    const privacy = document.getElementById("privacy-setting").value;
-    const userId = firebase.auth().currentUser.uid;
-    const post_text = document.getElementById("post-text").value;
-
-    if (post_text === "" || tags === "" || privacy === "") {
-        alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
-        return
-    }
+function submitpost(tags, privacy, userId, post_text) {
+    
 
     const newPostKey = firebase.database().ref().child("users/"+userId+"/post").push().key;
 
     const updates = {};
-    updates["users/"+userId+"/post" + newPostKey] = {
+    updates["users/"+userId+"/posts/post" + newPostKey] = {
         "tags": tags,
         "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
         "content": post_text,
@@ -68,7 +60,7 @@ function submitpost() {
         firebase.database().ref().update(updates2);
     }
 
-    window.socialNetwork.printPosts(); 
+    // window.socialNetwork.printPosts(cbDOM); 
 
 
 
