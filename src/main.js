@@ -17,7 +17,7 @@ const config = {
     let postKeys = Object.keys(snapshot.val());
     postKeys.reverse();
     for(let post of postKeys) {
-        
+        // console.log(Object.values(snapshot.val()[post].comments).length)
         document.getElementById("content").innerHTML += `
         <div class="post">
                <div class="post-header">
@@ -31,7 +31,9 @@ const config = {
                <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
                <a class="edit-post teachers-font">Editar</a>
                <a class="remove-post teachers-font">Eliminar</a>
+               <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
                </div>
+               <div id="create-comments-section-${post}"></div>
                <div class="comments-section" id="comments-section-${post}">
                </div>
         </div>
@@ -54,6 +56,10 @@ const config = {
         let commentsButtons = document.getElementsByClassName("comments");
         for (let i = 0; i < commentsButtons.length; i++) {
             commentsButtons[i].addEventListener("click", showComments)
+        }
+        let createCommentsButtons = document.getElementsByClassName("create-comment");
+        for (let i = 0; i < createCommentsButtons.length; i ++) {
+          createCommentsButtons[i].addEventListener("click", createComment)
         }
 
         // document.getElementById(post).addEventListener("click", setLikePost)
