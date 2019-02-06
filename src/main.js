@@ -11,6 +11,7 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+  
   function printPostsDOM(snapshot){
     document.getElementById("content").innerHTML = ""
     let postKeys = Object.keys(snapshot.val());
@@ -26,14 +27,16 @@ const config = {
                <div class="post-content">
                 <span>${snapshot.val()[post].content}</span>
                </div>
-               <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+               <div class="options"> <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
                <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
+               <a class="edit-post teachers-font">Editar</a>
+               <a class="remove-post teachers-font">Eliminar</a>
+               </div>
                <div class="comments-section" id="comments-section-${post}">
-               
                </div>
         </div>
 
-        
+      
         `
 
         document.getElementById("comments-section-"+post).style.display = "none"
