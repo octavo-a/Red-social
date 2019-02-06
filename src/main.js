@@ -11,13 +11,60 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+  function printPostsDOM(snapshot){
+    document.getElementById("content").innerHTML = ""
+    let postKeys = Object.keys(snapshot.val());
+    postKeys.reverse();
+    for(let post of postKeys) {
+        
+        document.getElementById("content").innerHTML += `
+        <div class="post">
+               <div class="post-header">
+                   <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
   
+               </div>
+               <div class="post-content">
+                <span>${snapshot.val()[post].content}</span>
+               </div>
+               <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+               <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
+               <div class="comments-section" id="comments-section-${post}">
+               
+               </div>
+        </div>
+
+        
+        `
+
+        document.getElementById("comments-section-"+post).style.display = "none"
+
+        if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
+            document.getElementById(post).innerHTML = `
+            <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
+            `
+        }
+        // console.log("creando funciones")
+        let likeButtons = document.getElementsByClassName("like");
+        for (let i = 0; i < likeButtons.length; i++) {
+            likeButtons[i].addEventListener("click", setLikePost)
+        }
+        let commentsButtons = document.getElementsByClassName("comments");
+        for (let i = 0; i < commentsButtons.length; i++) {
+            commentsButtons[i].addEventListener("click", showComments)
+        }
+
+        // document.getElementById(post).addEventListener("click", setLikePost)
+        // document.getElementById("comments"+post).addEventListener("click", showComments)
+        
+      }
+    
+}
 
   // FUNCION QUE CREA PAGINA INICIAL
   function loginPage() {
     
     document.getElementById("root").innerHTML = `
-    <div id="logo"><img src="./img/teachersLogo.png"></div>
+    <div id="logo-login"><img src="./img/teachersLogo.png"></div>
     <div id="logins">
     <p class="teachers-font">Si ya tienes cuenta con nosotros, inicia sesión!</p>
     <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
@@ -43,19 +90,29 @@ const config = {
       emailLogin(email, password);
     })
 
-    // BOTON PARA CREAR CUENTA
+    // BOTON QUE LLEVA A PAGINA DE CREAR CUENTA
     document.getElementById("new-account").addEventListener("click", ()=> {
       document.getElementById("root").innerHTML = `
-      <div id="logo"><img src="./img/teachersLogo.png"></div>
+      <div id="logo-login"><img src="./img/teachersLogo.png"></div>
       <div id="create-account">
       <p class="teachers-font">Ingresa un correo y una contraseña para tu cuenta</p>
       <input type="text"  id="login-mail" class="login-input" placeholder="Correo electrónico..">
       <input type="password" id="login-pwd" class="login-input" placeholder="Contraseña..">
       <button id="login-btn" class="login-btn">Crear Cuenta</button>
+      <a class="teachers-font" id="volver">Volver</a>
       </div>
       
       
       `
+      // BOTON QUE VUELVE AL LOGIN
+      document.getElementById("volver").addEventListener("click", loginPage)
+
+      // BOTON QUE CREA CUENTA
+      document.getElementById("login-btn").addEventListener("click", ()=>{
+        const mail = document.getElementById("login-mail"). value;
+        const pwd = document.getElementById("login-pwd").value;
+        createAccount(mail, pwd);
+      })
     })
 
   }
@@ -96,54 +153,7 @@ const config = {
         
         `
       
-      window.socialNetwork.printPosts(function(snapshot){
-        document.getElementById("content").innerHTML = ""
-        let postKeys = Object.keys(snapshot.val());
-        postKeys.reverse();
-        for(let post of postKeys) {
-            
-            document.getElementById("content").innerHTML += `
-            <div class="post">
-                   <div class="post-header">
-                       <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
-      
-                   </div>
-                   <div class="post-content">
-                    <span>${snapshot.val()[post].content}</span>
-                   </div>
-                   <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
-                   <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
-                   <div class="comments-section" id="comments-section-${post}">
-                   
-                   </div>
-            </div>
-
-            
-            `
-
-            document.getElementById("comments-section-"+post).style.display = "none"
-
-            if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
-                document.getElementById(post).innerHTML = `
-                <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
-                `
-            }
-            // console.log("creando funciones")
-            let likeButtons = document.getElementsByClassName("like");
-            for (let i = 0; i < likeButtons.length; i++) {
-                likeButtons[i].addEventListener("click", setLikePost)
-            }
-            let commentsButtons = document.getElementsByClassName("comments");
-            for (let i = 0; i < commentsButtons.length; i++) {
-                commentsButtons[i].addEventListener("click", showComments)
-            }
-
-            // document.getElementById(post).addEventListener("click", setLikePost)
-            // document.getElementById("comments"+post).addEventListener("click", showComments)
-            
-          }
-        
-    });
+      window.socialNetwork.printPosts(printPostsDOM);
 
   
   // BOTON QUE CREA PAGINA PARA POSTEAR
@@ -163,10 +173,23 @@ const config = {
     
     `
     //BOTON QUE GENERA POST
-    document.getElementById("post-it").addEventListener("click", submitpost)
+    document.getElementById("post-it").addEventListener("click", ()=> {
+      const tags = document.getElementById("post-tags").value;
+      const privacy = document.getElementById("privacy-setting").value;
+      const userId = firebase.auth().currentUser.uid;
+      const post_text = document.getElementById("post-text").value;
+
+      if (post_text === "" || tags === "" || privacy === "") {
+        alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
+        return
+      }
+      submitpost(tags, privacy, userId, post_text)
+    } )//este es el de submit post
 
     //BOTON QUE VUELVE A LOS POST
-    document.getElementById("cancel").addEventListener("click", window.socialNetwork.printPosts)
+    document.getElementById("cancel").addEventListener("click", ()=> {
+      window.socialNetwork.printPosts(printPostsDOM)
+    })
   })
 
   // BOTON BARRA DE NAVEGACIÓN LATERAL
@@ -190,11 +213,11 @@ const config = {
   firebase.auth().getRedirectResult().then(function(result) {
     if (result.credential) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
+      const token = result.credential.accessToken;
       // ...
     }
     // The signed-in user info.
-    var user = result.user;
+    const user = result.user;
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
