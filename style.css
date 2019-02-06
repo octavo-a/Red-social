@@ -282,6 +282,17 @@ footer {
     margin-top: 50px;
 }
 
+.options{
+    display: flex;
+} 
+
+.edit-post{
+    margin: auto;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
 #div-logo {
     display: block;
     margin: auto;
@@ -354,4 +365,9 @@ textarea.post-input {
     .responsive {
         display: flex;
     }
+  }
+
+  #edit-post{
+    margin-top: 80 px;
+
   }
