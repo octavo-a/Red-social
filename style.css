@@ -90,12 +90,12 @@ body {
 
 }
 
-.login-input:focus, .post-input:focus {
+.login-input:focus, .post-input:focus, .comment-input {
     outline: none;
     border: 2px solid rgb(11, 89, 116);
 }
 
-.login-btn, #post-it, #cancel {
+.login-btn, #post-it, #cancel, .comment-btn {
     display: block;
     margin: 10px auto;
     font-family: 'Roboto', sans-serif;
@@ -277,6 +277,7 @@ footer {
 }
 
 #volver {
+    cursor: pointer;
     display: block;
     text-decoration-line: underline;
     margin-top: 50px;
@@ -290,8 +291,8 @@ footer {
     margin: auto;
     margin-right: 10px;
     cursor: pointer;
-
 }
+
 
 #div-logo {
     display: block;
@@ -357,9 +358,32 @@ textarea.post-input {
     display: flex;
 }
 
-/* .line {
-    text-decoration-line: 
-} */
+.comment-input {
+    width: 90%;
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif !important;
+    border: 0.5px solid rgb(11, 89, 116);
+    height: 50px;
+    resize: none;
+}
+
+.create-comments-section {
+    width: 100%;
+    min-height: 20%;
+    margin: 5% auto;
+    /* border: 1px solid rgb(33, 126, 156); */
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+.comment-btn {
+    color: white;
+    background-color: rgb(11, 89, 116);
+    margin-right: 10px;
+}
 
 @media only screen and (max-width: 768px) {
     .responsive {
