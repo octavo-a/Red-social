@@ -292,7 +292,9 @@ footer {
     margin-right: 10px;
     cursor: pointer;
 }
-
+.remove-post{
+    cursor: pointer;
+}
 
 #div-logo {
     display: block;
