@@ -11,71 +11,64 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+
+
+//   function printPostsDOM(snapshot){
+//     document.getElementById("content").innerHTML = ""
+//     let postKeys = Object.keys(snapshot.val());
+//     postKeys.reverse();
+//     for(let post of postKeys) {
+//         // console.log(Object.values(snapshot.val()[post].comments).length)
+//         document.getElementById("content").innerHTML += `
+//         <div class="post" id="caja${post}">
+//                <div class="post-header">
+//                    <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
   
-  function printPostsDOM(snapshot){
-    document.getElementById("content").innerHTML = ""
-    let postKeys = Object.keys(snapshot.val());
-    postKeys.reverse();
-    for(let post of postKeys) {
-        // console.log(Object.values(snapshot.val()[post].comments).length)
-        document.getElementById("content").innerHTML += `
-        <div class="post">
-               <div class="post-header">
-                   <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
-  
-               </div>
-               <div class="post-content">
-                <span>${snapshot.val()[post].content}</span>
-               </div>
-               <div class="options"> <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
-               <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"+post] ? Object.values(snapshot.val()[post]["comments"+post]).length : "0"}</span></a>
-               <a class="edit-post teachers-font">Editar</a>
-               <a id="delete-${post}" class="remove-post teachers-font">Eliminar</a>
-               <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
-               </div>
-               <div id="create-comments-section-${post}"></div>
-               <div class="comments-section" id="comments-section-${post}">
-               </div>
-        </div>
+//                </div>
+//                <div class="post-content">
+//                 <span>${snapshot.val()[post].content}</span>
+//                </div>
+//                <div class="options">
+//                <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+//                <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"] ? Object.values(snapshot.val()[post]["comments"]).length : "0"}</span></a>
+//                <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
+//                </div>
+//                <div id="create-comments-section-${post}"></div>
+//                <div class="comments-section" id="comments-section-${post}">
+               
+//                </div>
+//         </div>
 
-      
-        `
-
-        document.getElementById("comments-section-"+post).style.display = "none"
-
-        if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
-            document.getElementById(post).innerHTML = `
-            <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
-            `
-        }
-        // console.log("creando funciones")
-        let likeButtons = document.getElementsByClassName("like");
-        for (let i = 0; i < likeButtons.length; i++) {
-            likeButtons[i].addEventListener("click", setLikePost)
-        }
-        let commentsButtons = document.getElementsByClassName("comments");
-        for (let i = 0; i < commentsButtons.length; i++) {
-            commentsButtons[i].addEventListener("click", showComments)
-        }
-        let createCommentsButtons = document.getElementsByClassName("create-comment");
-        for (let i = 0; i < createCommentsButtons.length; i ++) {
-          createCommentsButtons[i].addEventListener("click", createComment)
-        }
-
-        let deletePost = document.getElementsByClassName("remove-post");
-        for (let i = 0; i < deletePost.length; i ++) {
-          deletePost[i].addEventListener("click", removePost)
-        }
-         
         
-          
+//         `
 
-        // document.getElementById(post).addEventListener("click", setLikePost)
-        // document.getElementById("comments"+post).addEventListener("click", showComments)
+//         document.getElementById("comments-section-"+post).style.display = "none"
+
+//         if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
+//             document.getElementById(post).innerHTML = `
+//             <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
+//             `
+//         }
+//         // console.log("creando funciones")
+//         let likeButtons = document.getElementsByClassName("like");
+//         for (let i = 0; i < likeButtons.length; i++) {
+//             likeButtons[i].addEventListener("click", setLikePost)
+//         }
+//         let commentsButtons = document.getElementsByClassName("comments");
+//         for (let i = 0; i < commentsButtons.length; i++) {
+//             commentsButtons[i].addEventListener("click", showComments)
+//         }
+//         let createCommentsButtons = document.getElementsByClassName("create-comment");
+//         for (let i = 0; i < createCommentsButtons.length; i ++) {
+//           createCommentsButtons[i].addEventListener("click", createComment)
+//         }
+
+//         // document.getElementById(post).addEventListener("click", setLikePost)
+//         // document.getElementById("comments"+post).addEventListener("click", showComments)
         
-      }
-      
-}
+//       }
+    
+// }
 
   // FUNCION QUE CREA PAGINA INICIAL
   function loginPage() {
@@ -167,11 +160,17 @@ const config = {
        <footer class="responsive">
           <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
           <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
-       </footer>
-        
+          <a><i id="btnUp"class="material-icons">arrow_upward</i></a>
+        </footer>
         `
-      
-      window.socialNetwork.printPosts(printPostsDOM);
+
+    document.getElementById("btnUp").addEventListener("click", scrollWin);
+
+    function scrollWin() {
+      document.getElementById("content").scrollTo(0, 0);
+    }
+        
+      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM);
 
   
   // BOTON QUE CREA PAGINA PARA POSTEAR
@@ -206,7 +205,7 @@ const config = {
 
     //BOTON QUE VUELVE A LOS POST
     document.getElementById("cancel").addEventListener("click", ()=> {
-      window.socialNetwork.printPosts(printPostsDOM)
+      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
     })
   })
 

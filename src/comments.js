@@ -11,7 +11,7 @@ function showComments() {
             document.getElementById("comments-section-"+postId).innerHTML += `
             
             <div class="comment-header">
-            <span><img src="./img/userLogo.png" class="user-pic-post" alt="userPic"><p>${snapshot.val()[comment].author} - Profesora de Básica</p></span>       
+            <span><img src="${snapshot.val()[comment].authorPic ? snapshot.val()[comment].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[comment].author} - Profesora de Básica</p></span>       
             </div>
             <div class="comment-content">
                 <span>${snapshot.val()[comment].content}</span>
@@ -80,8 +80,7 @@ function submitpost(tags, privacy, userId, post_text) {
     if (privacy === "public") {
         firebase.database().ref().update(updates2);
     }
-
-   
+    window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)   
 }
 
 function submitComment(userId, post_text, postKey) {
