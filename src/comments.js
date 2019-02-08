@@ -80,8 +80,7 @@ function submitpost(tags, privacy, userId, post_text) {
     if (privacy === "public") {
         firebase.database().ref().update(updates2);
     }
-
-   
+    window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)   
 }
 
 function submitComment(userId, post_text, postKey) {

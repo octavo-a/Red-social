@@ -11,62 +11,62 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
-  function printPostsDOM(snapshot){
-    document.getElementById("content").innerHTML = ""
-    let postKeys = Object.keys(snapshot.val());
-    postKeys.reverse();
-    for(let post of postKeys) {
-        // console.log(Object.values(snapshot.val()[post].comments).length)
-        document.getElementById("content").innerHTML += `
-        <div class="post" id="caja${post}">
-               <div class="post-header">
-                   <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
+//   function printPostsDOM(snapshot){
+//     document.getElementById("content").innerHTML = ""
+//     let postKeys = Object.keys(snapshot.val());
+//     postKeys.reverse();
+//     for(let post of postKeys) {
+//         // console.log(Object.values(snapshot.val()[post].comments).length)
+//         document.getElementById("content").innerHTML += `
+//         <div class="post" id="caja${post}">
+//                <div class="post-header">
+//                    <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} - Profesora de Básica</p></span>
   
-               </div>
-               <div class="post-content">
-                <span>${snapshot.val()[post].content}</span>
-               </div>
-               <div class="options">
-               <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
-               <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"] ? Object.values(snapshot.val()[post]["comments"]).length : "0"}</span></a>
-               <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
-               </div>
-               <div id="create-comments-section-${post}"></div>
-               <div class="comments-section" id="comments-section-${post}">
+//                </div>
+//                <div class="post-content">
+//                 <span>${snapshot.val()[post].content}</span>
+//                </div>
+//                <div class="options">
+//                <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
+//                <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"] ? Object.values(snapshot.val()[post]["comments"]).length : "0"}</span></a>
+//                <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
+//                </div>
+//                <div id="create-comments-section-${post}"></div>
+//                <div class="comments-section" id="comments-section-${post}">
                
-               </div>
-        </div>
+//                </div>
+//         </div>
 
         
-        `
+//         `
 
-        document.getElementById("comments-section-"+post).style.display = "none"
+//         document.getElementById("comments-section-"+post).style.display = "none"
 
-        if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
-            document.getElementById(post).innerHTML = `
-            <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
-            `
-        }
-        // console.log("creando funciones")
-        let likeButtons = document.getElementsByClassName("like");
-        for (let i = 0; i < likeButtons.length; i++) {
-            likeButtons[i].addEventListener("click", setLikePost)
-        }
-        let commentsButtons = document.getElementsByClassName("comments");
-        for (let i = 0; i < commentsButtons.length; i++) {
-            commentsButtons[i].addEventListener("click", showComments)
-        }
-        let createCommentsButtons = document.getElementsByClassName("create-comment");
-        for (let i = 0; i < createCommentsButtons.length; i ++) {
-          createCommentsButtons[i].addEventListener("click", createComment)
-        }
+//         if (snapshot.val()[post].likes !== undefined && Object.keys(snapshot.val()[post].likes).indexOf(firebase.auth().currentUser.uid) !== -1) {
+//             document.getElementById(post).innerHTML = `
+//             <i class="material-icons">star</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span>
+//             `
+//         }
+//         // console.log("creando funciones")
+//         let likeButtons = document.getElementsByClassName("like");
+//         for (let i = 0; i < likeButtons.length; i++) {
+//             likeButtons[i].addEventListener("click", setLikePost)
+//         }
+//         let commentsButtons = document.getElementsByClassName("comments");
+//         for (let i = 0; i < commentsButtons.length; i++) {
+//             commentsButtons[i].addEventListener("click", showComments)
+//         }
+//         let createCommentsButtons = document.getElementsByClassName("create-comment");
+//         for (let i = 0; i < createCommentsButtons.length; i ++) {
+//           createCommentsButtons[i].addEventListener("click", createComment)
+//         }
 
-        // document.getElementById(post).addEventListener("click", setLikePost)
-        // document.getElementById("comments"+post).addEventListener("click", showComments)
+//         // document.getElementById(post).addEventListener("click", setLikePost)
+//         // document.getElementById("comments"+post).addEventListener("click", showComments)
         
-      }
+//       }
     
-}
+// }
 
   // FUNCION QUE CREA PAGINA INICIAL
   function loginPage() {
@@ -167,7 +167,7 @@ const config = {
       document.getElementById("content").scrollTo(0, 0);
     }
         
-      window.socialNetwork.printPosts(printPostsDOM);
+      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM);
 
   
   // BOTON QUE CREA PAGINA PARA POSTEAR
@@ -202,7 +202,7 @@ const config = {
 
     //BOTON QUE VUELVE A LOS POST
     document.getElementById("cancel").addEventListener("click", ()=> {
-      window.socialNetwork.printPosts(printPostsDOM)
+      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
     })
   })
 
