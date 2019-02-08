@@ -109,6 +109,22 @@ function submitComment(userId, post_text, postKey) {
     }
 
    
+
 }
 
+function removePost() {
+    let  shortenId= this.id.slice(7)
+
+    let commentsRef = firebase.database().ref("posts/"+shortenId);
+    let commentsRef2 = firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/posts/"+shortenId);
+    let option = confirm("Confirma si quieres eliminar el post")
+    
+    if (option == true) {
+        commentsRef.remove();
+        commentsRef2.remove();
+	} else {
+        return  null
+    
+    }
+}
 

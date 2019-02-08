@@ -24,8 +24,6 @@ window.onload = initialization;
     
     document.getElementById("btn").addEventListener("click", submitpost, false)   
     
-    
-
   }
 
   function submitpost() {
@@ -33,8 +31,9 @@ window.onload = initialization;
 
     if (post_text === ""){
 
-      return
+      return 
     }
+  
 
   var newPostKey = firebase.database().ref().child('users/perfil/post').push().key;
 
@@ -51,11 +50,8 @@ window.onload = initialization;
 
 //se limpia el textarea al hacer click
  
-//   function clearText(){
-//     document.getElementById("btn").addEventListener('click',clear);
-// }
-//   function clear(){
-//     post_text.innerHTML = "";
+// function clearContents(post_text) {
+//   post_text.value = '';
 // }
 
 
@@ -65,7 +61,7 @@ window.onload = initialization;
 (function() {
 
 const preObject = document.getElementById('users');
-const mensaje_retornado = document.getElementById('post_fact')
+const mensaje_retornado = document.getElementById('post_fact') //div donde retornará los post
 
 //crear referencias
 const dbRefObject = firebase.database().ref().child('users');
@@ -84,20 +80,17 @@ preObject.innerText = JSON.stringify(snap.val(), null, 3);
     mensaje_retornado.appendChild(textArea);
  });
 
- dbRefmensaje.on('child_changed', snap =>{
-   const textareaChanged = document.getElementById(snap.key);
-   textareaChanged.innerText = snap.val();
- });
-
- dbRefmensaje.on('child_removed', snap => {
- const textAreaRemove = document.getElementById(snap.key);
- textAreaRemove.remove();
- })
-
 
 }());
 
+// function funcionPrincipal(callback){
+//   alert('hago algo y llamo al callback avisando que terminé');
+//   callback('Miguel');
+// }
 
+// funcionPrincipal(function(nombre){
+//  alert('me llamo ' + nombre);
+// });
 
 
 

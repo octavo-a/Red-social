@@ -23,6 +23,7 @@ window.socialNetwork = {
         
     },
     
+
     printPosts: (cbDOM)=> {
         firebase.database().ref("/posts").on("value", cbDOM)
     },
@@ -45,6 +46,8 @@ window.socialNetwork = {
                    <div class="options">
                    <a class="like" id=${post}><i class="material-icons">star_border</i><span>${snapshot.val()[post].likes ? Object.values(snapshot.val()[post].likes).length : "0"}</span></a>
                    <a class="comments" id="comments${post}"><i class="material-icons">comment</i><span>${snapshot.val()[post]["comments"] ? Object.values(snapshot.val()[post]["comments"]).length : "0"}</span></a>
+                   <a class="edit-post teachers-font">Editar</a>
+                   <a id="delete-${post}" class="remove-post teachers-font">Eliminar</a>
                    <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
                    </div>
                    <div id="create-comments-section-${post}"></div>
@@ -74,7 +77,12 @@ window.socialNetwork = {
             }
             let createCommentsButtons = document.getElementsByClassName("create-comment");
             for (let i = 0; i < createCommentsButtons.length; i ++) {
-              createCommentsButtons[i].addEventListener("click", createComment)
+                createCommentsButtons[i].addEventListener("click", createComment)
+            }
+
+            let deletePost = document.getElementsByClassName("remove-post");
+            for (let i = 0; i < deletePost.length; i ++) {
+                deletePost[i].addEventListener("click", removePost)
             }
     
             // document.getElementById(post).addEventListener("click", setLikePost)

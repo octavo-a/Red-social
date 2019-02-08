@@ -282,13 +282,16 @@ footer {
     margin-top: 50px;
 }
 
-.options {
+.options{
     display: flex;
-}
+} 
 
-.create-comment {
+.edit-post{
     margin: auto;
     margin-right: 10px;
+    cursor: pointer;
+}
+.remove-post{
     cursor: pointer;
 }
 
@@ -387,4 +390,9 @@ textarea.post-input {
     .responsive {
         display: flex;
     }
+  }
+
+  #edit-post{
+    margin-top: 80 px;
+
   }

@@ -11,6 +11,8 @@ const config = {
   firebase.initializeApp(config);
   loginPage();
 
+
+
 //   function printPostsDOM(snapshot){
 //     document.getElementById("content").innerHTML = ""
 //     let postKeys = Object.keys(snapshot.val());
@@ -123,6 +125,7 @@ const config = {
       })
     })
 
+    
   }
 
 
@@ -248,27 +251,10 @@ const config = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
+
+
+
 
 
 
