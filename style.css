@@ -142,12 +142,11 @@ footer {
     max-height: 50px;
 }
 
-#user-profile, #new-post {
+#user-profile, #new-post, #btnUp {
     display: block;
     margin: auto 10px;
     margin-right: 10px;
-    cursor: pointer;
-    
+    cursor: pointer;   
 }
 
 .responsive {
