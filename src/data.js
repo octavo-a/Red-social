@@ -84,6 +84,8 @@ window.socialNetwork = {
             for (let i = 0; i < deletePost.length; i ++) {
                 deletePost[i].addEventListener("click", removePost)
             }
+
+          
     
             // document.getElementById(post).addEventListener("click", setLikePost)
             // document.getElementById("comments"+post).addEventListener("click", showComments)

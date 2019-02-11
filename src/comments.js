@@ -15,9 +15,19 @@ function showComments() {
             </div>
             <div class="comment-content">
                 <span>${snapshot.val()[comment].content}</span>
+            <div>
+            <a class="edit-comment" >Editar</a>
+            <a id="delete-comment-${snapshot.val()[comment].postId}/comments/${comment}" class="remove-comment">Eliminar</a>
+            </div>
             </div> 
             
             `
+
+            let deleteComment = document.getElementsByClassName("remove-comment");
+            for (let i = 0; i < deleteComment.length; i++){
+                deleteComment[i].addEventListener("click", removeComment)
+
+            }
         }
     })
     if(areTherePosts === false) {
@@ -93,14 +103,16 @@ function submitComment(userId, post_text, postKey) {
         "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
         "content": post_text,
         "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
+        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png",
+        "postId": postKey
     }
     const updates2 = {};
     updates2["posts/" + postKey + "/comments/" + newPostKey] ={
         "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
         "content": post_text,
         "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
+        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png",
+         "postId": postKey
     }
 
     firebase.database().ref().update(updates);
@@ -111,6 +123,8 @@ function submitComment(userId, post_text, postKey) {
    
 
 }
+
+//Función para eliminar post
 
 function removePost() {
     let  shortenId= this.id.slice(7)
@@ -127,4 +141,20 @@ function removePost() {
     
     }
 }
+
+//Funcion para eliminar comentarios
+
+function removeComment() {
+    let shortenId2=this.id.slice(15)
+    let commentRef3= firebase.database().ref("posts/"+shortenId2);
+    let optionConfirmRemove = confirm ("Confirma si quieres eliminar el comentario")
+    if (optionConfirmRemove == true){
+        commentRef3.remove();
+    } else {
+        return null
+    }
+    
+}
+
+
 
