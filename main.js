@@ -160,7 +160,7 @@ const config = {
        <footer class="responsive">
           <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
           <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
-          <a><i id="btnUp"class="material-icons">arrow_upward</i></a>
+          <a><i id="btnUp"class="arrow material-icons">arrow_upward</i></a>
         </footer>
         `
 
@@ -247,9 +247,8 @@ const config = {
     // ...
   });
 
-
-
-
+ 
+ 
 
 })
 

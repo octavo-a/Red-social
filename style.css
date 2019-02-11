@@ -32,10 +32,7 @@ body {
     
 }
 
-.teachers-font {
-    color: rgb(11, 89, 116);
-    text-align: center;
-}
+
 
 #new-account {
     cursor: pointer;
@@ -140,13 +137,15 @@ footer {
 .icon-large, i.fas.fa-edit.fa-3x:before {
     max-width: 50px;
     max-height: 50px;
+     margin-top: 8px;  /*agregado por ana */
 }
 
-#user-profile, #new-post, #btnUp {
+#user-profile, #new-post {
     display: block;
     margin: auto 10px;
     margin-right: 10px;
-    cursor: pointer;   
+    cursor: pointer;
+    
 }
 
 .responsive {
@@ -288,12 +287,12 @@ footer {
 
 .edit-post{
     margin: auto;
-    margin-right: 10px;
+    /* margin-right: 14px; */
     cursor: pointer;
-}
-.remove-post{
-    cursor: pointer;
-}
+    margin-top: 5px;   /*agregado por ana*/
+    size: 5px;
+}/*agregado y cambiado por ana*/
+
 
 #div-logo {
     display: block;
@@ -372,6 +371,7 @@ textarea.post-input {
 }
 
 .create-comments-section {
+    margin-right: 100px;
     width: 100%;
     min-height: 20%;
     margin: 5% auto;
@@ -379,20 +379,58 @@ textarea.post-input {
     background-color: whitesmoke;
     border-radius: 10px;
 }
-
 .comment-btn {
     color: white;
     background-color: rgb(11, 89, 116);
     margin-right: 10px;
 }
 
+
+
+.remove-post{  /*agregado por ana*/
+    size: 5px;
+    margin-top: 5px; 
+    margin-left: 30px;
+    cursor: pointer;
+
+}
+
+/* .create-comments{
+    margin-right: 0px;
+    margin-top: 0px; 
+} */
+
+.teachers-font {  /*agregado y cambiado por ana*/
+    color: rgb(11, 89, 116);
+    text-align: center;
+    margin-left: 13px;
+    margin-top: 5px; 
+    cursor: pointer; /*agregado por ana*/
+} 
+
+.remove-comment, .edit-comment{  /*agregado por ana*/
+    cursor: pointer;
+} 
+
+.edit-comment, .remove-comment{/*agregado por ana*/
+    color: rgb(11, 89, 116);
+    margin-left: 40px;
+    margin-top: 100px;
+}
+
+.material-icons{ /*agregado por ana*/
+    margin-right: 179px;
+    margin-top: 28px;
+    width: 17px;
+}
+
+.arrow{
+    max-width: 20;
+    color: steelblue;
+}
+
 @media only screen and (max-width: 768px) {
     .responsive {
         display: flex;
     }
-  }
-
-  #edit-post{
-    margin-top: 80 px;
-
   }
