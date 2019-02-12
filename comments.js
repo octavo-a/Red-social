@@ -146,6 +146,7 @@ function removePost() {
 
 function removeComment() {
     let shortenId2=this.id.slice(15)
+    console.log(shortenId2)
     let commentRef3= firebase.database().ref("posts/"+shortenId2);
     let optionConfirmRemove = confirm ("Confirma si quieres eliminar el comentario")
     if (optionConfirmRemove == true){

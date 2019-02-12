@@ -194,6 +194,7 @@ footer {
     height: 100%;
     margin-top: 80px;
     margin-bottom: 80px;
+    /* overflow: scroll; */
     /* display: flex-start; */
 }
 
