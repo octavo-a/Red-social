@@ -60,22 +60,33 @@ Para: ver sus publicaciones y/o poder contactarlos.
 
 ### **Prototipo de baja de nuestra Red Social!**
 
+El prototipo de esta página consta de 4 pantallas. La primera es donde el usuario debe iniciar sesión, que puede ser con una cuenta creada desde la aplicación, mediante su cuenta de gmail o de Facebook, en caso que no éste registrado y no quiere iniciar sesión desde las dos ultimas plataformas, hay un link que dice "registrate aquí" y se abre otra pantalla donde puede ingresar sus datos y crear su cuenta con clave.
+
+Una vez registrado o iniciado sesión se abre otra pantalla que es la pagina principal de nuestra red social, donde puede ver las publicaciones de otros usuarios, en la parte superior hay un buscador donde damos la opción al usuario buscar post por temas de su interes. Los post se pueden comentar y dar "likes" y el profesor que emitio su post puede eliminar y editarlo, lo mismo para los comentarios. En la parte inferior aparecen tres imagenes/simbolos: flecha hacia arriba (damos la opción de volver al inicio de las publicaciones rapidamente una vez que el usuario haya visto diversos post y a bajado bastante,de esta manera se ahorra tiempo), lapiz (con este simbolo se puede crear un post) y una persona (al hacer click se despliega una columna donde puede ver su perfil, buscar amigos y cerrar sesión).
+
+Al hacer click en el lapiz, aparece otra pantalla donde puede emitir el post, en la parte superior de esta sección hay una campo donde debe señalar el "tag"/tema de su post para que otros usuarios que buscan un tema especifico puedan encontrarlo. Luego debe seleccionar si su post será publico o privado (sólo para amigos de su red). El tercer paso es emitir el post y al terminar debe hacer click en "publicar".
+
+Si el usuario quiere buscar amigo debe haer "click" en la parte inferior de la aplicación, luego en la opción buscar amigos y se abrira otra pantalla donde podrá concretar la acción.
 
 
 
-Diseñamos protptipo de pagina que consta de tres pantalla, la primera es de bienvenida y con un boton "GO" el usuario podrá interactuar con la información que desea obtener. La segunda pantalla es donde se despliega todos los pokemones donde el usuario puede ordenar los 151 pokemones por orden alfabetico ascendente y descendente y por numero, tambien mostraremos la opcion de que pueda tener más información sobre como ser un maestro pokemon, guia de como jugar PokemonGo! y saber la cantidad de pokemones que aparecen por hora durante el día. Éste último es la tercera pantalla donde lo vamos a interactuar con un reloj.
+En esta imagen se muestra el inicio de nuestra aplicación donde el usuario debe iniciar sesión
 
-En esta imagen se muestra el protitpo de flujo de nuestra pagina
+![imagen 1](img/Sckechers_1.png) 
 
-![imagen 1](img/sketch1.png) 
+Aquí se ve como sería nuestra pagina principal
 
-Aquí detallamos como se va a interactuar la información en la pantalla dos:
+![imagen 2](img/skechers_2.png)
 
-![imagen 2](img/sketch2.png)
+En la siguiente imagen se ve como sería la sección para crear un nuevo post
 
-En esta última imagen es como tenemos pensado mostrar nuestro calculo de data.
+![imagen 3](img/skechers_3.png)
 
-![imagen 3](img/sketch3.png)
+En ésta ultima se ve como sería la sección para buscar amigos.
+
+![imagen 4](img/skechers_4.png)
+
+
 
 ### **Prototipo de alta de nuestra pagina Pokego!**
 
