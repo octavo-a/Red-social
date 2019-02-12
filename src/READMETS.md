@@ -1,5 +1,5 @@
 
-# TEACHERS' Squad
+# TEACHERS' SQUAD
 
 ## **Introducción**
 
@@ -15,7 +15,7 @@ Para definir el diseño de nuestra Red Social comenzamos a revisar la interfaz d
 
 ### **Entrevista**  
 
-Se realizó una encuesta a seis profesores de dististas disciplinas, les explicamos la aplicación que tenemos pensado hacer y les parece muy interesante porque ninguno conoce una aplicación que este dirigida principalmente a ellos.
+Se realizó una encuesta a seis profesoreEXITs de dististas disciplinas, les explicamos la aplicación que tenemos pensado hacer y les parece muy interesante porque ninguno conoce una aplicación que este dirigida principalmente a ellos.
 
 
 ### **Historia de usuario**
@@ -26,7 +26,7 @@ Cómo: Profesora Jefe de un curso de enseñanza media.
 
 Quiero: Un espacio donde poder compartir tips sobre temas difíciles de abordar en el aula.
 
-Para: Planificar de mejor manera la clase.
+Para: Compartir mi experiencia y conocer la de los demás en la planificación de las clases.
 
 
 **Historia Nº 2**
@@ -54,9 +54,39 @@ Quiero: Agregar colegas de mi misma especialidad.
 
 Para: ver sus publicaciones y/o poder contactarlos.
 
+### **Definición de Terminado**
 
+Historia Nº 1
 
-DEFINICION DE TERMINADO
+* Iniciar sesión en la Red Social
+* Hacer click en crear nuevo post
+* Señalar el tag del tema que se abordará
+* Seleccionar si su post será publico o privado
+* Escribir el post
+* Publicar post
+
+Historia Nº 2
+
+* Iniciar sesión en la Red Social
+* Hacer click en crear nuevo post
+* Señalar el tag del tema que necesito orientación
+* Seleccionar, que el post sea público
+* Escribir el post
+* Publicar post
+
+Historia Nº 3
+
+* Iniciar sesión
+* Escribir en el buscador de la página principal el tag sobre el tema
+* Leer los post emitidos
+* Escribir comentarios sobre esos post si tengo más dudas
+
+Historia Nº 4
+
+* Iniciar sesión
+* Hacer click en el icono que aparece en la parte inferior de la aplicación
+* Se despliega una columna, donde seleccionar la sección "Amigos"
+* Luego escribir el nombre de la persona que esta buscando
 
 
 
