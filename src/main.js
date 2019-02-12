@@ -160,14 +160,16 @@ const config = {
        <footer class="responsive">
           <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
           <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
-          <a><i id="btnUp"class="arrow material-icons">arrow_upward</i></a>
+          <a><i id="btnUp" class="arrow material-icons">arrow_upward</i></a>
         </footer>
         `
 
     document.getElementById("btnUp").addEventListener("click", scrollWin);
 
     function scrollWin() {
-      document.getElementById("content").scrollTo(0, 0);
+      // console.log("funciona")
+      // document.getElementById("content").scrollTo(0, 0);
+      window.scrollTo(0,0);
     }
         
       window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM);
