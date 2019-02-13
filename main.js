@@ -250,20 +250,27 @@ const config = {
         <p class="center">Especialidad</p>
         <input class="profile-item login-input" type="text" id="proficency" ${snapshot.val().profile.especialidad ? "placeholder='"+snapshot.val().profile.especialidad+"'" : "placeholder='Profesor de..'"}>
         <button class="teachers-font" type="button" id="update-profile">Guardar cambios</button>
+        <a class="teachers-font" id="profile-update-cancel">Cancelar</a>
       
         </div>
         
         `
 
       })
-
+      // BOTON QUE ACTUALIZA EL PERFIL
       document.getElementById("update-profile").addEventListener("click", ()=> {
         let username = document.getElementById("username").value;
         let proficency = document.getElementById("proficency").value;
         let userPic = document.getElementById("userpic").value;
         window.socialNetwork.updateProfile(username, proficency, userPic);
       })
-  
+
+      // BOTON QUE CANCELA ACTUALIZACIÓN DE PERFIL Y VUELVE A PAGINA DE POSTS
+      document.getElementById("profile-update-cancel").addEventListener("click", ()=> {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("content2").style.display = "none";
+        window.scrollTo(0,0);
+      })
   
     })
   
