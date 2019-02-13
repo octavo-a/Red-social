@@ -15,7 +15,7 @@ Para definir el diseño de nuestra Red Social comenzamos a revisar la interfaz d
 
 ### **Entrevista**  
 
-Se realizó una encuesta a seis profesoreEXITs de dististas disciplinas, les explicamos la aplicación que tenemos pensado hacer y les parece muy interesante porque ninguno conoce una aplicación que este dirigida principalmente a ellos.
+Se realizó una encuesta a seis profesores de dististas disciplinas, les explicamos la aplicación que tenemos pensado hacer y les parece muy interesante porque ninguno conoce una aplicación que este dirigida principalmente a ellos.
 
 
 ### **Historia de usuario**
@@ -103,19 +103,19 @@ Si el usuario quiere buscar amigo debe hacer "click" en la parte inferior de la 
 
 En esta imagen se muestra el inicio de nuestra aplicación donde el usuario debe iniciar sesión
 
-![imagen 1](img/Sckechers_1.png) 
+![imagen 1](src/img/Sckechers_1.png) 
 
 Aquí se ve como sería nuestra pagina principal
 
-![imagen 2](img/skechers_2.png)
+![imagen 2](src/img/skechers_2.png)
 
 En la siguiente imagen se ve como sería la sección para crear un nuevo post
 
-![imagen 3](img/skechers_3.png)
+![imagen 3](src/img/skechers_3.png)
 
 En ésta ultima se ve como sería la sección para buscar amigos.
 
-![imagen 4](img/skechers_4.png)
+![imagen 4](src/img/skechers_4.png)
 
 
 
