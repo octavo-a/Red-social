@@ -136,92 +136,140 @@ const config = {
     if (user) {
       // User is signed in.
         window.socialNetwork.createNewUserStorage();
-        document.getElementById("root").innerHTML = `
-        
-        <nav class="responsive">
-        <div id="div-logo">
-            <img id="logo" src="./img/teachersLogo.png" alt="logo">
+        firebase.database().ref("users/"+firebase.auth().currentUser.uid).on("value", function(snapshot){
+          // console.log(snapshot.val())
+          document.getElementById("root").innerHTML = `
+          
+          <nav class="responsive">
+          <div id="div-logo">
+              <img id="logo" src="./img/teachersLogo.png" alt="logo">
+          </div>
+          <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a><i class="fas fa-search fa-lg"></i></a></div>
+         </nav>
+    
+         <div id="content">
+             
+    
+         </div>
+         <div id="content2">
+         </div>
+         <div id="user-profile-side-nav">
+             <div id="user-pic"><img src="${snapshot.val().profile.profilePic}" class="user-pic" alt="userPic"></div>
+             <div id="user-name">${snapshot.val().profile.username}</div>
+             <div id="profile-info" class="side-option"><a>Perfil de Usuario</a></div>
+             <div class="side-option"><a>Amigos</a></div>
+             <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
+    
+         </div>
+         <footer class="responsive">
+            <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
+            <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
+            <a><i id="btnUp" class="arrow material-icons">arrow_upward</i></a>
+          </footer>
+          `
+  
+      document.getElementById("btnUp").addEventListener("click", scrollWin);
+  
+      function scrollWin() {
+        // console.log("funciona")
+        // document.getElementById("content").scrollTo(0, 0);
+        window.scrollTo(0,0);
+      }
+          
+        window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM);
+  
+    
+    // BOTON QUE CREA PAGINA PARA POSTEAR
+    document.getElementById("new-post").addEventListener("click", ()=> {
+      document.getElementById("content").style.display = "block";
+      document.getElementById("content2").style.display = "none";
+      document.getElementById("content").innerHTML = `
+      <div><input class="post-input" type="text" id="post-tags" placeholder="#tags #etiquetas #máximo3"></div>
+      <div class="select-div" ><select class="post-input" id="privacy-setting">
+      <option value="" disabled selected>Seleccione la privacidad de su post</option>
+      <option value="public">Post Público</option>
+      <option value="private">Post Privado(solo amigos)</option>
+      </select></div>
+      <div class="input-div"><textarea class="post-input" type="text" id="post-text"></textarea></div>
+      <div class="post-and-cancel">
+      <button type="button" id="cancel">Cancelar</button>
+      <button type="button" id="post-it">Crear publicación</button>
+      </div>
+      
+      `
+      //BOTON QUE GENERA POST
+      document.getElementById("post-it").addEventListener("click", ()=> {
+        const tags = document.getElementById("post-tags").value;
+        const privacy = document.getElementById("privacy-setting").value;
+        const userId = firebase.auth().currentUser.uid;
+        const post_text = document.getElementById("post-text").value;
+  
+        if (post_text === "" || tags === "" || privacy === "") {
+          alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
+          return
+        }
+        submitpost(tags, privacy, userId, post_text)
+      } )//este es el de submit post
+  
+      //BOTON QUE VUELVE A LOS POST
+      document.getElementById("cancel").addEventListener("click", ()=> {
+        window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
+      })
+    })
+  
+    // BOTON BARRA DE NAVEGACIÓN LATERAL
+    document.getElementById("user-profile").addEventListener("click", ()=> {
+      document.getElementById("user-profile-side-nav").style.display = "block";
+    })
+  
+    // PARA CERRAR NAVEGACIÓN LATERAL
+    document.getElementById("content").addEventListener("click", ()=> {
+      document.getElementById("user-profile-side-nav").style.display = "none";
+    })
+    document.getElementById("content2").addEventListener("click", ()=> {
+      document.getElementById("user-profile-side-nav").style.display = "none";
+    })
+  
+  
+    // PARA CREAR LA PAGINA DE EDITAR PERFIL DE USUARIO
+    document.getElementById("profile-info").addEventListener("click", ()=> {
+      document.getElementById("user-profile-side-nav").style.display = "none";
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).once("value", function(snapshot){
+        document.getElementById("content").style.display = "none";
+        document.getElementById("content2").style.display = "block";
+        document.getElementById("content2").innerHTML = `
+        <div id="profile-div">
+        <p class="center">Foto de Perfil</p>
+        <img class="profile-item" src="${snapshot.val().profile.profilePic}">
+        <p class="center">Para cambiar su imagen de perfil ingrese un link a la nueva imagen en la casilla de abajo:</p>
+        <input class="profile-item login-input" id="userpic" type="text" placeholder="Link a su nueva imagen de perfil">
+        <p class="center">Nombre de Usuario</p>
+        <input class="profile-item login-input" type="text" id="username" placeholder="${snapshot.val().profile.username}">
+        <p class="center">Email</p>
+        <input disabled class="profile-item login-input" type="text" id="usermail" placeholder="${snapshot.val().profile.email}">
+        <p class="center">Especialidad</p>
+        <input class="profile-item login-input" type="text" id="proficency" ${snapshot.val().profile.especialidad ? "placeholder='"+snapshot.val().profile.especialidad+"'" : "placeholder='Profesor de..'"}>
+        <button class="teachers-font" type="button" id="update-profile">Guardar cambios</button>
+      
         </div>
-        <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a><i class="fas fa-search fa-lg"></i></a></div>
-       </nav>
-  
-       <div id="content">
-           
-  
-       </div>
-       <div id="user-profile-side-nav">
-           <div id="user-pic"><img src="${firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : './img/userLogo.png'}" class="user-pic" alt="userPic"></div>
-           <div id="user-name">${firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email}</div>
-           <div class="side-option"><a>Perfil de Usuario</a></div>
-           <div class="side-option"><a>Amigos</a></div>
-           <div class="side-option"><a id="logout">Cerrar Sesión</a></div>
-  
-       </div>
-       <footer class="responsive">
-          <a id="user-profile"><img src="./img/userLogo.png" alt="userlogo" class="icon-large"></a>
-          <a id="new-post"><i class="fas fa-edit fa-3x"></i></a>
-          <a><i id="btnUp" class="arrow material-icons">arrow_upward</i></a>
-        </footer>
+        
         `
 
-    document.getElementById("btnUp").addEventListener("click", scrollWin);
+      })
 
-    function scrollWin() {
-      // console.log("funciona")
-      // document.getElementById("content").scrollTo(0, 0);
-      window.scrollTo(0,0);
-    }
-        
-      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM);
-
+      document.getElementById("update-profile").addEventListener("click", ()=> {
+        let username = document.getElementById("username").value;
+        let proficency = document.getElementById("proficency").value;
+        let userPic = document.getElementById("userpic").value;
+        window.socialNetwork.updateProfile(username, proficency, userPic);
+      })
   
-  // BOTON QUE CREA PAGINA PARA POSTEAR
-  document.getElementById("new-post").addEventListener("click", ()=> {
-    document.getElementById("content").innerHTML = `
-    <div><input class="post-input" type="text" id="post-tags" placeholder="#tags #etiquetas #máximo3"></div>
-    <div class="select-div" ><select class="post-input" id="privacy-setting">
-    <option value="" disabled selected>Seleccione la privacidad de su post</option>
-    <option value="public">Post Público</option>
-    <option value="private">Post Privado(solo amigos)</option>
-    </select></div>
-    <div class="input-div"><textarea class="post-input" type="text" id="post-text"></textarea></div>
-    <div class="post-and-cancel">
-    <button type="button" id="cancel">Cancelar</button>
-    <button type="button" id="post-it">Crear publicación</button>
-    </div>
-    
-    `
-    //BOTON QUE GENERA POST
-    document.getElementById("post-it").addEventListener("click", ()=> {
-      const tags = document.getElementById("post-tags").value;
-      const privacy = document.getElementById("privacy-setting").value;
-      const userId = firebase.auth().currentUser.uid;
-      const post_text = document.getElementById("post-text").value;
-
-      if (post_text === "" || tags === "" || privacy === "") {
-        alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
-        return
-      }
-      submitpost(tags, privacy, userId, post_text)
-    } )//este es el de submit post
-
-    //BOTON QUE VUELVE A LOS POST
-    document.getElementById("cancel").addEventListener("click", ()=> {
-      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
+  
     })
-  })
+  
+    document.getElementById("logout").addEventListener("click", logout)
 
-  // BOTON BARRA DE NAVEGACIÓN LATERAL
-  document.getElementById("user-profile").addEventListener("click", ()=> {
-    document.getElementById("user-profile-side-nav").style.display = "block";
-  })
-
-  // PARA CERRAR NAVEGACIÓN LATERAL
-  document.getElementById("content").addEventListener("click", ()=> {
-    document.getElementById("user-profile-side-nav").style.display = "none";
-  })
-
-  document.getElementById("logout").addEventListener("click", logout)
+        })
     } else {
       // No user is signed in.
       loginPage();
@@ -251,6 +299,11 @@ const config = {
 
  
  
+
+
+
+
+
 
 })
 
