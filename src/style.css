@@ -459,6 +459,13 @@ textarea.post-input {
     float: none;
 }
 
+#profile-update-cancel {
+    margin: auto;
+    margin-bottom: 20px;
+    display: block;
+    text-decoration-line: underline;
+}
+
 @media only screen and (max-width: 768px) {
     .responsive {
         display: flex;
