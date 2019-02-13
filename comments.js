@@ -11,7 +11,7 @@ function showComments() {
             document.getElementById("comments-section-"+postId).innerHTML += `
             
             <div class="comment-header">
-            <span><img src="${snapshot.val()[comment].authorPic ? snapshot.val()[comment].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[comment].author} - Profesora de Básica</p></span>       
+            <span><img src="${snapshot.val()[comment].authorPic ? snapshot.val()[comment].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[comment].author} ${snapshot.val()[comment].especialidad ? "- "+snapshot.val()[comment].especialidad : ""}</p></span>       
             </div>
             <div class="comment-content">
                 <span>${snapshot.val()[comment].content}</span>
@@ -66,59 +66,70 @@ function createComment() {
 
 function submitpost(tags, privacy, userId, post_text) {
     
+    firebase.database().ref("users/"+firebase.auth().currentUser.uid).once("value", function(snapshot){
+        const newPostKey = firebase.database().ref().child("users/"+userId+"/post").push().key;
+    
+        const updates = {};
+        updates["users/"+userId+"/posts/post" + newPostKey] = {
+            "tags": tags,
+            "author": snapshot.val().profile.username,
+            "content": post_text,
+            "authorId": firebase.auth().currentUser.uid,
+            "authorPic": snapshot.val().profile.profilePic,
+            "especialidad": snapshot.val().profile.especialidad
 
-    const newPostKey = firebase.database().ref().child("users/"+userId+"/post").push().key;
+        }
+        const updates2 = {};
+        updates2["posts/post" + newPostKey] ={
+            "tags": tags,
+            "author": snapshot.val().profile.username,
+            "content": post_text,
+            "authorId": firebase.auth().currentUser.uid,
+            "authorPic": snapshot.val().profile.profilePic,
+            "especialidad": snapshot.val().profile.especialidad
 
-    const updates = {};
-    updates["users/"+userId+"/posts/post" + newPostKey] = {
-        "tags": tags,
-        "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text,
-        "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
-    }
-    const updates2 = {};
-    updates2["posts/post" + newPostKey] ={
-        "tags": tags,
-        "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text,
-        "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png"
-    }
+        }
+    
+        firebase.database().ref().update(updates);
+        if (privacy === "public") {
+            firebase.database().ref().update(updates2);
+        }
+        window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)   
 
-    firebase.database().ref().update(updates);
-    if (privacy === "public") {
-        firebase.database().ref().update(updates2);
-    }
-    window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)   
+    })
 }
 
 function submitComment(userId, post_text, postKey) {
     
+    firebase.database().ref("users/"+firebase.auth().currentUser.uid).once("value", function(snapshot){
+        const newPostKey = firebase.database().ref().child("users/"+userId+"/comments").push().key;
+        // console.log(snapshot.val().profile.username)
+        const updates = {};
+        updates["users/"+userId+"/posts/" + postKey + "/comments/" + newPostKey] = {
+            "author": snapshot.val().profile.username,
+            "content": post_text,
+            "authorId": firebase.auth().currentUser.uid,
+            "authorPic": snapshot.val().profile.profilePic,
+            "postId": postKey,
+            "especialidad": snapshot.val().profile.especialidad
+        }
+        const updates2 = {};
+        updates2["posts/" + postKey + "/comments/" + newPostKey] ={
+            "author": snapshot.val().profile.username,
+            "content": post_text,
+            "authorId": firebase.auth().currentUser.uid,
+            "authorPic": snapshot.val().profile.profilePic,
+            "postId": postKey,
+            "especialidad": snapshot.val().profile.especialidad
 
-    const newPostKey = firebase.database().ref().child("users/"+userId+"/comments").push().key;
+        }
+    
+        firebase.database().ref().update(updates);
+        if (firebase.database().ref() !== null) {
+            firebase.database().ref().update(updates2);
+        }
 
-    const updates = {};
-    updates["users/"+userId+"/posts/" + postKey + "/comments/" + newPostKey] = {
-        "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text,
-        "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png",
-        "postId": postKey
-    }
-    const updates2 = {};
-    updates2["posts/" + postKey + "/comments/" + newPostKey] ={
-        "author": firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : firebase.auth().currentUser.email,
-        "content": post_text,
-        "authorId": firebase.auth().currentUser.uid,
-        "authorPic": firebase.auth().currentUser.photoURL ? firebase.auth().currentUser.photoURL : "./img/userLogo.png",
-         "postId": postKey
-    }
-
-    firebase.database().ref().update(updates);
-    if (firebase.database().ref() !== null) {
-        firebase.database().ref().update(updates2);
-    }
+    })
 
    
 
@@ -146,7 +157,7 @@ function removePost() {
 
 function removeComment() {
     let shortenId2=this.id.slice(15)
-    console.log(shortenId2)
+    // console.log(shortenId2)
     let commentRef3= firebase.database().ref("posts/"+shortenId2);
     let optionConfirmRemove = confirm ("Confirma si quieres eliminar el comentario")
     if (optionConfirmRemove == true){

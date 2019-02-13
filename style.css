@@ -92,7 +92,7 @@ body {
     border: 2px solid rgb(11, 89, 116);
 }
 
-.login-btn, #post-it, #cancel, .comment-btn {
+.login-btn, #post-it, #cancel, .comment-btn, #update-profile {
     display: block;
     margin: 10px auto;
     font-family: 'Roboto', sans-serif;
@@ -110,7 +110,7 @@ body {
     background-color: rgb(11, 89, 116);
 }
 
-.login-btn:focus, #post-it:focus, #cancel:focus {
+.login-btn:focus, #post-it:focus, #cancel:focus, #update-profile:focus {
     outline: none;
 }
 
@@ -173,7 +173,9 @@ footer {
 
 #user-name {
     text-align: center;
+    /* word-break: break-word; */
     font-size: 18px;
+    
 }
 
 .side-option {
@@ -190,10 +192,11 @@ footer {
     margin: auto;
 }
 
-#content {
-    height: 100%;
+#content, #content2 {
+    /* height: 100%; */
     margin-top: 80px;
     margin-bottom: 80px;
+    width: 100%;
     /* overflow: scroll; */
     /* display: flex-start; */
 }
@@ -216,6 +219,10 @@ footer {
     background-color: whitesmoke;
     border-radius: 10px;
 
+}
+
+.post {
+    min-height: 0;
 }
 
 .post .post-header span p, .comments-section .comment-header span p {
@@ -331,14 +338,14 @@ select.post-input {
 textarea.post-input {
     word-break: break-word;
     resize: none;
-    height: 80%;
+    height: 80vw;
 }
 
 .input-div {
     height: 60%;
 }
 
-#post-it {
+#post-it, #update-profile {
     float: right;
     margin-right: 7%;
     color: white;
@@ -427,6 +434,29 @@ textarea.post-input {
 .arrow{
     max-width: 20;
     color: steelblue;
+}
+
+#profile-div {
+    display: block;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+.profile-item {
+    max-width: 80%;
+    min-width: 80%;
+    display: block;
+    margin: auto;
+}
+
+.center {
+    text-align: center;
+}
+
+#update-profile {
+    margin: 20px auto;
+    float: none;
 }
 
 @media only screen and (max-width: 768px) {
