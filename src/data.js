@@ -44,7 +44,7 @@ window.socialNetwork = {
         for(let post of postKeys) {
             // console.log(Object.values(snapshot.val()[post].comments).length)
             document.getElementById("content").innerHTML += `
-            <div class="post" id="caja${post}">
+            <div class="post div-responsive" id="caja${post}">
                    <div class="post-header">
                        <span><img src="${snapshot.val()[post].authorPic ? snapshot.val()[post].authorPic : './img/userLogo.png'}" class="user-pic-post" alt="userPic"><p>${snapshot.val()[post].author} ${snapshot.val()[post].especialidad ? "- "+snapshot.val()[post].especialidad : ""}</p></span>
       
@@ -60,7 +60,7 @@ window.socialNetwork = {
                    <a class="teachers-font create-comment" id="create-comment-${post}">Comentar</a>
                    </div>
                    <div id="create-comments-section-${post}"></div>
-                   <div class="comments-section" id="comments-section-${post}">
+                   <div class="comments-section div-responsive" id="comments-section-${post}">
                    
                    </div>
             </div>
