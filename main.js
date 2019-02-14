@@ -140,11 +140,11 @@ const config = {
           // console.log(snapshot.val())
           document.getElementById("root").innerHTML = `
           
-          <nav class="responsive">
+          <nav class="responsive-nav">
           <div id="div-logo">
               <img id="logo" src="./img/teachersLogo.png" alt="logo">
           </div>
-          <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a><i class="fas fa-search fa-lg"></i></a></div>
+          <div id="search-nav"><input id="search" type="text" placeholder="Buscar.."><a id="search-tag"><i class="fas fa-search fa-lg"></i></a><a id="new-post2" class="nav-bar-desktop"><i class="fas fa-edit fa-2x"></i></a><a id="user-profile2" class="nav-bar-desktop"><img src="./img/userLogo.png" alt="userlogo" class="icon-large nav-bar-desktop"></a></div>
          </nav>
     
          <div id="content">
@@ -180,45 +180,15 @@ const config = {
   
     
     // BOTON QUE CREA PAGINA PARA POSTEAR
-    document.getElementById("new-post").addEventListener("click", ()=> {
-      document.getElementById("content").style.display = "block";
-      document.getElementById("content2").style.display = "none";
-      document.getElementById("content").innerHTML = `
-      <div><input class="post-input" type="text" id="post-tags" placeholder="#tags #etiquetas #máximo3"></div>
-      <div class="select-div" ><select class="post-input" id="privacy-setting">
-      <option value="" disabled selected>Seleccione la privacidad de su post</option>
-      <option value="public">Post Público</option>
-      <option value="private">Post Privado(solo amigos)</option>
-      </select></div>
-      <div class="input-div"><textarea class="post-input" type="text" id="post-text"></textarea></div>
-      <div class="post-and-cancel">
-      <button type="button" id="cancel">Cancelar</button>
-      <button type="button" id="post-it">Crear publicación</button>
-      </div>
-      
-      `
-      //BOTON QUE GENERA POST
-      document.getElementById("post-it").addEventListener("click", ()=> {
-        const tags = document.getElementById("post-tags").value;
-        const privacy = document.getElementById("privacy-setting").value;
-        const userId = firebase.auth().currentUser.uid;
-        const post_text = document.getElementById("post-text").value;
-  
-        if (post_text === "" || tags === "" || privacy === "") {
-          alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
-          return
-        }
-        submitpost(tags, privacy, userId, post_text)
-      } )//este es el de submit post
-  
-      //BOTON QUE VUELVE A LOS POST
-      document.getElementById("cancel").addEventListener("click", ()=> {
-        window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
-      })
-    })
+    document.getElementById("new-post").addEventListener("click", postingPage)
+    document.getElementById("new-post2").addEventListener("click", postingPage)
+
   
     // BOTON BARRA DE NAVEGACIÓN LATERAL
     document.getElementById("user-profile").addEventListener("click", ()=> {
+      document.getElementById("user-profile-side-nav").style.display = "block";
+    })
+    document.getElementById("user-profile2").addEventListener("click", ()=> {
       document.getElementById("user-profile-side-nav").style.display = "block";
     })
   
@@ -314,6 +284,46 @@ const config = {
 
 })
 
+function postingPage () {
+
+    document.getElementById("content").style.display = "block";
+    document.getElementById("content2").style.display = "none";
+    document.getElementById("content").innerHTML = `
+    <div><input class="post-input" type="text" id="post-tags" placeholder="#tags #etiquetas #máximo3"></div>
+    <div class="select-div" ><select class="post-input" id="privacy-setting">
+    <option value="" disabled selected>Seleccione la privacidad de su post</option>
+    <option value="public">Post Público</option>
+    <option value="private">Post Privado(solo amigos)</option>
+    </select></div>
+    <div class="input-div"><textarea class="post-input" type="text" id="post-text"></textarea></div>
+    <div class="post-and-cancel">
+    <button type="button" id="cancel">Cancelar</button>
+    <button type="button" id="post-it">Crear publicación</button>
+    </div>
+    
+    `
+    //BOTON QUE GENERA POST
+    document.getElementById("post-it").addEventListener("click", ()=> {
+      const tags = document.getElementById("post-tags").value;
+      const privacy = document.getElementById("privacy-setting").value;
+      const userId = firebase.auth().currentUser.uid;
+      const post_text = document.getElementById("post-text").value;
+
+      if (post_text === "" || tags === "" || privacy === "") {
+        alert("Por favor, ingrese todos los campos requeridos: ingrese al menos una etiqueta y especifique la privacidad de su mensaje")
+        return
+      }
+      submitpost(tags, privacy, userId, post_text)
+    } )//este es el de submit post
+
+    //BOTON QUE VUELVE A LOS POST
+    document.getElementById("cancel").addEventListener("click", ()=> {
+      window.socialNetwork.printPosts(window.socialNetwork.printPostsDOM)
+      window.scrollTo(0,0);
+
+    })
+  
+}
 
 
 
